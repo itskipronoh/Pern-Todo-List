@@ -1,32 +1,41 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const InputTodo = ({ addTodo }) => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title.trim()) return;
-    addTodo({
-      title,
-      completed: false,
-    });
-    setTitle("");
+    addTodo({ title, description, completed: false });
+    setTitle('');
+    setDescription('');
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="input-group mb-3">
+      <div className="mb-3">
+        <label className="form-label">Title:</label>
         <input
           type="text"
           className="form-control"
-          placeholder="Add Todo"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
-        <button className="btn btn-primary" type="submit">
-          Add Todo
-        </button>
       </div>
+      <div className="mb-3">
+        <label className="form-label">Description:</label>
+        <input
+          type="text"
+          className="form-control"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </div>
+      <button type="submit" className="btn btn-primary">
+        Add Todo
+      </button>
     </form>
   );
 };
